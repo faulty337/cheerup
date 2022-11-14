@@ -47,7 +47,6 @@ def comment_write():
         return redirect(url_for("index", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/get_comment',methods=["GET"])
-
 def get_comment():
     post_id = request.form("post_id")
     comment_list = list(db.comments.find({"post_id":post_id},{'_id':False}))
