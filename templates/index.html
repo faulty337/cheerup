@@ -86,6 +86,17 @@
                 url:'/detail',
                 data:{post_num:post_num},
                 success: function (response){
+                    let post = response['post_detail']
+                    let user_name = post['user_name']
+                    let content = post['content']
+                    let date = post['post']
+
+                    let rows = response['comment_list']
+                       for(let i= 0; i< rows.length; i++){
+                        let name = rows[i]['user_name']
+                        let content = rows[i]['content']
+                        $('#cards-box').append(temp_html)
+                    }
 
                 }
             })
@@ -93,6 +104,6 @@
     </script>
 </head>
 <body>
-<input id="content"></input>
+
 </body>
 </html>

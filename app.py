@@ -25,10 +25,14 @@ def user_post_get():
     user_id = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
     post_list = list(db.post.find({'user_id':user_id},{'_id':False}))
-    return jsonify({'post':post_list})
+
+    return jsonify({'post_list':post_list})
 @app.route('/detail', methods="GET")
 def post_detail():
-
+    post_num = request.form['post_num']
+    post_detail = db.post.find({'post_num':post_num},{'_id':False})
+    comment_list = list(db.commennt.find({'post_num':post_num},{'_id':False}))
+    return jsonify({'post_detail':post_detail},{'comment_list':comment_list})
 @app.route('/set_post', methods=["POST"])
 def set_post():
     # 게시글 번호 넣기
