@@ -85,8 +85,6 @@ def set_post():
         # 게시글 내용 넣기
         
         # 게시글 작성 날짜
-        
-
 
         doc = {
             'post_num' : count ,
