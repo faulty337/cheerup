@@ -23,7 +23,7 @@ def index():
     return render_template('index.html')
 @app.route('/get_post',methods=["GET"])
 def post_get():
-    post_list = list(db.bucket.find({}, {'_id': False}))
+    post_list = list(db.post.find({}, {'_id': False}))
     return jsonify({'post':post_list})
     
 @app.route('/user/get_post', methods=["GET"])
