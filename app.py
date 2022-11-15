@@ -11,7 +11,7 @@ from pymongo import MongoClient
 # ? 맥 환경 DB 초기화 코드( certifi가 필요 )
 ca = certifi.where()
 client = MongoClient(
-    "mongodb+srv://test:sparta@cluster0.mapsk1p.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    "mongodb+srv://test:sparta@cluster0.g39e2ay.mongodb.net/?retryWrites=true&w=majority",
     tlsCAFile=ca,
 )
 db = client.cheerup
@@ -20,25 +20,35 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    token_receive = request.cookies.get('chtoken')
+    print(token_receive)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"user_id": payload['user_id']})
+        print(payload['user_id'], user_info)
+        return render_template('index.html', user_name=user_info["user_name"])
+    except jwt.ExpiredSignatureError:
+        return render_template('index.html')
+    except jwt.exceptions.DecodeError:
+        return render_template('index.html')
+
 @app.route('/get_post',methods=["GET"])
 def post_get():
-    post_list = list(db.bucket.find({}, {'_id': False}))
-    return jsonify({'post':post_list})
+    post_list = list(db.posts.find({}, {'_id': False}))
+    return jsonify({'post_list':post_list})
     
 @app.route('/user/get_post', methods=["GET"])
 def user_post_get():
     payload =request.form['user_id']
     user_id = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-
-    post_list = list(db.post.find({'user_id':user_id},{'_id':False}))
+    post_list = list(db.posts.find({'user_id':user_id},{'_id':False}))
 
     return jsonify({'post_list':post_list})
 @app.route('/detail', methods=["GET"])
 def post_detail():
     post_num = request.form['post_num']
-    post_detail = db.post.find({'post_num':post_num},{'_id':False})
-    comment_list = list(db.commennt.find({'post_num':post_num},{'_id':False}))
+    post_detail = db.posts.find({'post_num':post_num},{'_id':False})
+    comment_list = list(db.comments.find({'post_num':post_num},{'_id':False}))
     return jsonify({'post_detail':post_detail},{'comment_list':comment_list})
     
 @app.route('/set_post', methods=["POST"])
@@ -50,7 +60,7 @@ def set_post():
     # 토큰으로 id 가져와서 닉네임 조회
     payload = request.form['user_id']
     id_receive = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-    name = db.userS.find_one({'user_id': id_receive})
+    name = db.users.find_one({'user_id': id_receive})
     name_receive = (name['user_name'])
 
     # 게시글 내용 넣기
@@ -64,7 +74,7 @@ def set_post():
         'comment': content_recive,
         'date': date_recive
     }
-    db.cheereup.insert_one(doc)
+    db.post.insert_one(doc)
 
 @app.route('/logout')
 def logout():
@@ -73,15 +83,18 @@ def logout():
 
 @app.route('/signup', methods=['POST'])  # GET(정보보기), POST(정보수정) 메서드 허용
 def signup():
-    user_id = request.form.get('user_id')
-    user_name = request.form.get('user_name')
-    user_pw = request.form.get('user_pw')
-    user_pw2 = request.form.get('user_pw2')
+    user_id = request.form['user_id']
+    user_name = request.form['user_name']
+    user_pw = request.form['user_pw']
+    user_pw2 = request.form['user_pw2']
     print(user_id, user_name, user_pw, user_pw2)
-    if user_pw != user_pw2:
-        return {'result':'fail', 'messag':'입력한 비밀번호가 다릅니다.'}
+    if user_id is "" or user_name is "" or user_pw is "" or user_pw2 is "":
+        return {'result':'fail', 'message':'작성하지 않은 칸이 존재합니다.'}
+    elif user_pw != user_pw2:
+        return {'result':'fail', 'message':'입력한 비밀번호가 다릅니다.'}
     elif db.users.find_one({'userid' : user_id}) is not None:
-        return {'result':'fail', 'messag':'이미 존재하는 아이디입니다.'}
+        return {'result':'fail', 'message':'이미 존재하는 아이디입니다.'}
+    
     else:
         # usertable = User(userid, username, password)
         usertable = {
@@ -96,11 +109,12 @@ def signup():
 def login():
     user_id = request.form['user_id']
     user_pw = hashlib.sha256(request.form['user_pw'].encode('utf-8')).hexdigest()
+    print(user_id)
     print(db.users.find_one({'user_id': user_id}))
     
     if db.users.find_one({'user_id': user_id, 'user_pw': user_pw}) is not None:
         payload = {
-            'userid': user_id,
+            'user_id': user_id,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60)
         }
 

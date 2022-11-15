@@ -27,7 +27,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: '/',
+                url: '/get_post',
                 data: {},
                 success: function (response) {
 
@@ -49,7 +49,7 @@
             let user_id = $.cookie('cutoken')
             $.ajax({
                 type: 'GET',
-                url:'/',
+                url:'/user/get_post',
                 data:{user_id:user_id},
                 success : function (response){
 
@@ -98,7 +98,6 @@
                        for(let i= 0; i< rows.length; i++){
                         let name = rows[i]['user_name']
                         let content = rows[i]['content']
-                        $('#cards-box').append(temp_html)
                     }
 
                 }
@@ -106,7 +105,8 @@
         }
     </script>
 </head>
-<body>
-
-</body>
+    <body>
+        {% include "header.html" %}
+        HelloWorld
+    </body>
 </html>
