@@ -211,14 +211,9 @@
       position: absolute;
       top: 0;
       left: 0;
-
-
-
       width: 100%;
       height: 100%;
-
       display: none;
-
       background-color: rgba(0, 0, 0, 0.4);
     }
 
@@ -231,7 +226,7 @@
       top: 50%;
       left: 50%;
 
-      width: 400px;
+      width: 600px;
       height: 600px;
 
       padding: 40px;
@@ -249,14 +244,9 @@
       position: absolute;
       top: 0;
       left: 0;
-
-
-
       width: 100%;
       height: 100%;
-
       display: none;
-
       background-color: rgba(0, 0, 0, 0.4);
     }
 
@@ -371,6 +361,40 @@
     #openagony {
       margin-top: 30px;
       font-size: 32px;
+    }
+
+    #input-form-custom {
+      width: 550px;
+      height: 600px;
+    }
+
+    #signup-button-box {
+      width: 100%;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #input-form-box-custom {
+      margin-top: 50px;
+      /* border: 1px solid black; */
+    }
+
+    #input-title {
+      width: 100%;
+      height: 40px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    #input-content {
+      width:100%;
+      height:400px;
+    }
+
+    #post_body_buttons {
+      margin-top: 30px;
     }
 
   </style>
@@ -525,22 +549,19 @@
       })
     }
     function save_post() {
-      let content = $('#input-content').val()
       let title = $('#input-title').val()
+      let content = $('#input-content').val()
       $.ajax({
         type: 'POST',
         url: '/set_post',
         data: { title: title, content: content },
         success: function (response) {
-
           if (response['result'] == 'success') {
             
             window.location.reload()
           } else {
-            alert(response['messagee'])
+            alert(response['message'])
           }
-
-
         }
       })
     }
@@ -560,8 +581,6 @@
           } else {
             alert(response['message'])
           }
-
-
         }
       })
     }
@@ -672,9 +691,6 @@
           </div>
           <button id="writing-button" onclick="postPopup()">글쓰기</button>
         </div>
-
-
-
         {% endif %}
       </div>
     </div>
@@ -719,11 +735,16 @@
 
     <div class="create-post">
       <div class="post_body">
-        <input class="form-control me-2" type="text" placeholder="고민을 함께 나누어보아요.. 고민은 나누면 가벼워집니다."
-          id="input-title" />
-        <input class="form-control me-2" type="text" id="input-content" />
-        <button onclick="save_post()">제출</button>
-        <button onclick="postPopdown()">취소</button>
+        <input class="form-control me-2" type="text" placeholder="제목"
+          id="input-title"></input>
+        <textarea class="form-control me-2" type="text" placeholder="고민을 함께 나누어보아요.. 고민은 나누면 가벼워집니다."
+          id="input-content"></textarea>
+        <!-- <button onclick="save_post()">제출</button>
+        <button onclick="postPopdown()">취소</button> -->
+        <div id="post_body_buttons">
+          <button type="button" class="btn btn-dark" onclick="save_post()">제출</button>
+          <button type="button" class="btn btn-outline-dark" onclick="postPopdown()">취소</button>
+        </div>
       </div>
 
     </div>
@@ -731,38 +752,44 @@
     <div class="signup">
       <div class="container">
         <div class="input-form-backgroud row">
-          <div class="input-form col-md-12 mx-auto">
+          <div class="input-form col-md-12 mx-auto" id="input-form-custom">
             <button type="button" class="btn btn-light" style="float: right;" onclick="signupPopdown()">X</button>
             <h4 class="mb-3">회원가입</h4>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
+            <!-- <div class="row">
+              
+            </div> -->
+            <div id="input-form-box-custom">
+              <div class="mb-3">
                 <label for="name">ID</label>
-                <input type="text" class="form-control" id="signup_user_id" name="user_id" placeholder="" value=""
+                <input type="text" class="form-control" id="signup_user_id" name="user_id" placeholder="ID" value=""
                   required>
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="mb-3">
                 <label for="nickname">별명</label>
-                <input type="text" class="form-control" id="signup_user_name" name="user_name" placeholder="" value=""
+                <input type="text" class="form-control" id="signup_user_name" name="user_name" placeholder="NICKNAME" value=""
+                  required>
+              </div>
+  
+              <div class="mb-3">
+                <label for="password">비밀번호</label>
+                <input type="password" class="form-control" id="signup_user_pw" name="user_pw" placeholder="PASSWORD"
+                  required>
+              </div>
+  
+              <div class="mb-3">
+                <label for="password">비밀번호 확인</label>
+                <input type="password" class="form-control" id="signup_user_pw2" name="user_pw2" placeholder="PASSWORD"
                   required>
               </div>
             </div>
+            
 
-            <div class="mb-3">
-              <label for="password">비밀번호</label>
-              <input type="password" class="form-control" id="signup_user_pw" name="user_pw" placeholder="password"
-                required>
+            <!-- <hr class="mb-4"> -->
+            <div id="signup-button-box">
+              <button class="btn btn-primary btn-lg btn-block" onclick="signup()">가입 완료</button>
             </div>
-
-            <div class="mb-3">
-              <label for="password">비밀번호 확인</label>
-              <input type="password" class="form-control" id="signup_user_pw2" name="user_pw2" placeholder="password"
-                required>
-            </div>
-
-            <hr class="mb-4">
-            <div class="mb-4"></div>
-            <button class="btn btn-primary btn-lg btn-block" onclick="signup()">가입 완료</button>
+            
 
           </div>
         </div>
