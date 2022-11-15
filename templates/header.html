@@ -1,6 +1,6 @@
 <script>
     function logout() {
-        $.removeCookie('chtoken');
+        $.removeCookie('cutoken');
         window.location.href = '/'
     }
 
@@ -20,7 +20,7 @@
             success: function (response) {
                 if (response['result'] == 'success') {
                     // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장
-                    $.cookie('chtoken', response['token']);
+                    $.cookie('cutoken', response['token']);
                     
                     alert('로그인 완료!')
                     window.location.href = '/'

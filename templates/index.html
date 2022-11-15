@@ -17,11 +17,10 @@
           $(document).ready(function () {
             if($.cookie('cutoken') == undefined){
                 // 내가 쓴 글 숨기기
+            }else{
+                user_listing();//
             }
             listing();
-            if($.cookie('cutoken') != undefined){
-                user_listing();
-            }
         });
         function listing() {
 
@@ -35,50 +34,56 @@
 
                     for (let i = 0; i < rows.length; i++) {
                         let post_num = rows[i]['post_num']
-                        let date = rows[i]['date']
+                        let date = rows[i]['create_date']
                         let title = rows[i]['title']
                         let name = rows[i]['user_name']
                         let content = rows[i]['content']
-                        temp_html=`onclick=aa(${post_num})`
-                        $('asd').append(temp_html)
+                        temp_html=`${post_num} ${date}  ${title} ${name} ${content}`
+                        $('#asd').append(temp_html)
                     }
                 }
             })
         }
         function user_listing(){
-            let user_id = $.cookie('cutoken')
             $.ajax({
                 type: 'GET',
                 url:'/user/get_post',
-                data:{user_id:user_id},
+                data:{},
                 success : function (response){
-
                     let rows = response['post_list']
-
-                    for(let i= 0; i< rows.length; i++){
-                        let post_num = rows[i]['post_num']
-                        let data = rows[i]['date']
-                        let title = rows[i]['title']
-                        let name = rows[i]['user_name']
-                        let content = rows[i]['content']
-                        temp_html=`onclick=aa(${post_num})`
-                        $('#cards-box').append(temp_html)
+                    if(rows != null){
+                        for(let i= 0; i< rows.length; i++){
+                            let post_num = rows[i]['post_num']
+                            let date = rows[i]['create_date']
+                            let title = rows[i]['title']
+                            let name = rows[i]['user_name']
+                            let content = rows[i]['content']
+                            temp_html=`${post_num} ${date}  ${title} ${name} ${content}`
+                            $('#cards-box').append(temp_html)
+                        }
                     }
+                    
 
                 }
             })
         }
           function save_comment() {
-            let user_id = $.cookie('cutoken')
             let content = $('#content').val()
-
+            let title = $('#title').val()
             $.ajax({
                 type: 'POST',
                 url: '/set_post',
-                data: {user_id: user_id, content_give: content},
+                data: {title: title, content: content},
                 success: function (response) {
-                    alert(response['msg'])
-                    window.location.reload()
+
+                    if(response['result'] == 'success'){
+                        alert(response['msg'])
+                        window.location.reload()
+                    }else{
+                        alert(response['msg'])
+                    }
+                    
+                    
                 }
             })
         }
@@ -108,5 +113,7 @@
     <body>
         {% include "header.html" %}
         HelloWorld
+        <div id="cards-box"></div>
+        <div id="asd"></div>
     </body>
 </html>
