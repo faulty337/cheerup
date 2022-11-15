@@ -23,7 +23,7 @@ def index():
     return render_template('index.html')
 @app.route('/get_post',methods=["GET"])
 def post_get():
-    post_list = list(db.bucket.find({}, {'_id': False}))
+    post_list = list(db.post.find({}, {'_id': False}))
     return jsonify({'post':post_list})
     
 @app.route('/user/get_post', methods=["GET"])
@@ -50,7 +50,7 @@ def set_post():
     # 토큰으로 id 가져와서 닉네임 조회
     payload = request.form['user_id']
     id_receive = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-    name = db.userS.find_one({'user_id': id_receive})
+    name = db.users.find_one({'user_id': id_receive})
     name_receive = (name['user_name'])
 
     # 게시글 내용 넣기
@@ -64,7 +64,7 @@ def set_post():
         'comment': content_recive,
         'date': date_recive
     }
-    db.cheereup.insert_one(doc)
+    db.post.insert_one(doc)
 
 
 
