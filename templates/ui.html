@@ -206,6 +206,7 @@
 
       transform: translateX(-50%) translateY(-50%);
     }
+
     .create-post {
       position: absolute;
       top: 0;
@@ -220,6 +221,7 @@
 
       background-color: rgba(0, 0, 0, 0.4);
     }
+
     .create-post.show {
       display: none;
     }
@@ -297,20 +299,23 @@
 
       transform: translateX(-50%) translateY(-50%);
     }
+
     .comment-box-custom {
-        width: 100%;
-        min-height: 50px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-      }
-      .write-style-custom {
-        font-size: 16px;
-      }
-      .comment-style-custom {
-        margin-left: 5px;
-        font-size: 16px;
-      }
+      width: 100%;
+      min-height: 50px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .write-style-custom {
+      font-size: 16px;
+    }
+
+    .comment-style-custom {
+      margin-left: 5px;
+      font-size: 16px;
+    }
   </style>
   <script>
     function login() {
@@ -348,14 +353,26 @@
       })
     }
     function signupPopup() {
-      popup = document.querySelector('.signup')
+      let popup = document.querySelector('.signup')
       popup.style.display = 'block';
     }
     function signupPopdown() {
-      popup = document.querySelector('.signup')
+      let popup = document.querySelector('.signup')
       popup.style.display = 'none';
     }
-
+    function postPopdown() {
+      let popup = document.querySelector('.create-post')
+      popup.style.display = 'none';
+    }
+    function detailPopdown() {
+      let popup = document.querySelector('.modal')
+      popup.style.display = 'none';
+      
+    }
+    function logout() {
+      $.removeCookie('cutoken');
+      window.location.href = '/'
+    }
 
     $(document).ready(function () {
       if ($.cookie('cutoken') == undefined) {
@@ -449,8 +466,8 @@
       })
     }
     function save_comment() {
-      let content = $('#content').val()
-      let title = $('#title').val()
+      let content = $('#input-content').val()
+      let title = $('#input-title').val()
       $.ajax({
         type: 'POST',
         url: '/set_post',
@@ -458,10 +475,10 @@
         success: function (response) {
 
           if (response['result'] == 'success') {
-            alert(response['msg'])
+            
             window.location.reload()
           } else {
-            alert(response['msg'])
+            alert(response['messagee'])
           }
 
 
@@ -517,7 +534,7 @@
         <div class="comment-style-custom">${content}</div>
       </div>`
             console.log(name, content)
-            
+
             $('#comment_list').append(temp_html)
           }
           detailPopup()
@@ -528,7 +545,7 @@
       popup = document.querySelector('.modal')
       popup.style.display = 'block';
     }
-    function postPopup(){
+    function postPopup() {
       popup = document.querySelector('.create-post')
       popup.style.display = 'block';
     }
@@ -567,13 +584,13 @@
         <div id="signbox-yeslogin">
           <div id="login-info">
             <div id="login-info-word">{{user_name}}님 환영합니다</div>
-            <button id="login-info-button">로그아웃</button>
+            <button id="login-info-button" onclick="logout()">로그아웃</button>
           </div>
           <button id="writing-button" onclick="postPopup()">글쓰기</button>
         </div>
 
-        
-        
+
+
         {% endif %}
       </div>
     </div>
@@ -599,26 +616,26 @@
     <!-- 모달 넣는 곳 -->
     <div class="modal">
       <div class="modal_body">
-        <div style="background-color: green; width:100%; height: 10px;"></div>
+        <button onclick="detailPopdown()">닫기</button>
         <div id="post-title"></div>
         <div id="post-username"></div>
         <div id="post-content"></div>
         <div id="post-date"></div>
-
         <div>댓글</div>
         <div id="comment_list"></div>
       </div>
-      
+
     </div>
 
     <div class="create-post">
       <div class="post_body">
-        <input class="form-control me-2" type="text" placeholder="고민을 함께 나누어보아요.. 고민은 나누면 가벼워집니다." aria-label="Search" id="input-title" />
-        <input class="form-control me-2" type="text"  id="input-content" />
-        <button>제출</button>
-        <button>취소</button>
+        <input class="form-control me-2" type="text" placeholder="고민을 함께 나누어보아요.. 고민은 나누면 가벼워집니다."
+          id="input-title" />
+        <input class="form-control me-2" type="text" id="input-content" />
+        <button onclick="save_comment()">제출</button>
+        <button onclick="postPopdown()">취소</button>
       </div>
-      
+
     </div>
 
     <div class="signup">

@@ -76,7 +76,7 @@ def set_post():
     token_receive = request.cookies.get('cutoken')
     content_recive = request.form['content']
     title = request.form['title']
-    date_recive = datetime.today()
+    date_recive = datetime.datetime.today()
     print(count, content_recive, title, date_recive)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -96,7 +96,7 @@ def set_post():
             'comment': content_recive,
             'create_date': date_recive
         }
-        db.post.insert_one(doc)
+        db.posts.insert_one(doc)
         return jsonify({'result':'success'})
     except jwt.ExpiredSignatureError:
         return jsonify({'result':'fail', 'message':'로그인이 만료되었습니다.'})
