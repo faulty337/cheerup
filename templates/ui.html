@@ -514,7 +514,7 @@
         }
       })
     }
-    function save_comment() {
+    function save_post() {
       let content = $('#input-content').val()
       let title = $('#input-title').val()
       $.ajax({
@@ -534,27 +534,49 @@
         }
       })
     }
-    function post_modal(post_num) {
-
+    function save_comment() {
+      let content = $('#input-content').val()
+      let post_num = $('.post-number').attr('id')
+      console.log(content, post_num)
       $.ajax({
-        type: 'GET',
-        url: '/detail',
-        data: { post_num: post_num },
+        type: 'POST',
+        url: '/comment_write',
+        data: { post_num: post_num, content: content },
         success: function (response) {
-          let post = response['post_detail']
-          let user_name = post['user_name']
-          let content = post['content']
-          let date = post['post']
-
-          let rows = response['comment_list']
-          for (let i = 0; i < rows.length; i++) {
-            let name = rows[i]['user_name']
-            let content = rows[i]['content']
+          console.log(response)
+          if (response['result'] == 'success') {
+            
+            window.location.reload()
+          } else {
+            alert(response['message'])
           }
+
 
         }
       })
     }
+
+    // function post_modal(post_num) {
+
+    //   $.ajax({
+    //     type: 'GET',
+    //     url: '/detail',
+    //     data: { post_num: post_num },
+    //     success: function (response) {
+    //       let post = response['post_detail']
+    //       let user_name = post['user_name']
+    //       let content = post['content']
+    //       let date = post['post']
+
+    //       let rows = response['comment_list']
+    //       for (let i = 0; i < rows.length; i++) {
+    //         let name = rows[i]['user_name']
+    //         let content = rows[i]['content']
+    //       }
+
+    //     }
+    //   })
+    // }
     function detail(post_num) {
       $.ajax({
         type: "GET",
@@ -562,11 +584,13 @@
         data: { post_num: post_num },
         success: function (response) {
           let post = response[0]['post_detail'][0]
+          let post_num = post['post_num']
           let title = post['title']
           let user_name = post['user_name']
           let content = post['content']
           let date = post['create_date']
-
+          
+          $('.post-number').attr('id', post_num)
           $('#post-title').text(title)
           $('#post-username').text(user_name)
           $('#post-content').text(content)
@@ -667,10 +691,13 @@
     <div class="modal">
       <div class="modal_body">
         <button onclick="detailPopdown()">닫기</button>
+        <div class ="post-number"></div>
         <div id="post-title"></div>
         <div id="post-username"></div>
         <div id="post-content"></div>
         <div id="post-date"></div>
+        <input class="form-control me-2" type="text" id="input-content"/>
+        <button onclick="save_comment()">입력</button>
         <div>댓글</div>
         <div id="comment-subject">댓글</div>
         <div id="comment_list"></div>
@@ -683,7 +710,7 @@
         <input class="form-control me-2" type="text" placeholder="고민을 함께 나누어보아요.. 고민은 나누면 가벼워집니다."
           id="input-title" />
         <input class="form-control me-2" type="text" id="input-content" />
-        <button onclick="save_comment()">제출</button>
+        <button onclick="save_post()">제출</button>
         <button onclick="postPopdown()">취소</button>
       </div>
 
