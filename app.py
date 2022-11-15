@@ -1,6 +1,7 @@
 import hashlib
 import jwt
-from datetime import datetime
+import datetime
+# from datetime import datetime
 import certifi 
 
 from flask import Flask, render_template, jsonify, request, redirect, make_response, flash, url_for
@@ -26,16 +27,17 @@ def index():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"user_id": payload['user_id']})
         print(payload['user_id'], user_info)
-        return render_template('index.html', user_name=user_info["user_name"])
+        return render_template('ui.html', user_name=user_info["user_name"])
     except jwt.ExpiredSignatureError:
         
-        return render_template('index.html')
+        return render_template('ui.html')
     except jwt.exceptions.DecodeError:
-        return render_template('index.html')
+        return render_template('ui.html')
 
 @app.route('/get_post',methods=["GET"])
 def post_get():
     post_list = list(db.posts.find({}, {'_id': False}))
+    print(post_list)
     return jsonify({'post_list':post_list})
     
 @app.route('/user/get_post', methods=["GET"])
@@ -113,7 +115,7 @@ def signup():
     user_pw = request.form['user_pw']
     user_pw2 = request.form['user_pw2']
     print(user_id, user_name, user_pw, user_pw2)
-    if user_id is None or user_name is None or user_pw is None or user_pw2 is None:
+    if user_id is "" or user_name is "" or user_pw is "" or user_pw2 is "":
         return {'result':'fail', 'message':'작성하지 않은 칸이 존재합니다.'}
     elif user_pw != user_pw2:
         return {'result':'fail', 'message':'입력한 비밀번호가 다릅니다.'}
@@ -140,7 +142,7 @@ def login():
     if db.users.find_one({'user_id': user_id, 'user_pw': user_pw}) is not None:
         payload = {
             'user_id': user_id,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=10)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=300)
         }
 
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')

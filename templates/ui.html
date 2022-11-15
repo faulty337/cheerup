@@ -1,307 +1,676 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
-      integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>스파르타 피디아</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <title>스파르타 피디아</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
-      rel="stylesheet"
-    />
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet" />
 
-    <style>
-      * {
-        font-family: "Gowun Dodum", sans-serif;
-      }
+  <style>
+    * {
+      font-family: "Gowun Dodum", sans-serif;
+    }
 
-      .mytitle {
-        width: 100%;
-        height: 250px;
+    .mytitle {
+      width: 100%;
+      height: 250px;
 
-        background-image: linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
-          ),
-          url("https://movie-phinf.pstatic.net/20210715_95/1626338192428gTnJl_JPEG/movie_image.jpg");
-        background-position: center;
-        background-size: cover;
+      background-image: linear-gradient(0deg,
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0.5)),
+        url("https://movie-phinf.pstatic.net/20210715_95/1626338192428gTnJl_JPEG/movie_image.jpg");
+      background-position: center;
+      background-size: cover;
 
-        color: white;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding-left: 30px;
-        padding-right: 30px;
-      }
+      color: white;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
 
-      .mytitle > button {
-        width: 200px;
-        height: 50px;
+    .mytitle>button {
+      width: 200px;
+      height: 50px;
 
-        background-color: transparent;
-        color: white;
+      background-color: transparent;
+      color: white;
 
-        border-radius: 50px;
-        border: 1px solid white;
+      border-radius: 50px;
+      border: 1px solid white;
 
-        margin-top: 10px;
-      }
+      margin-top: 10px;
+    }
 
-      .mytitle > button:hover {
-        border: 2px solid white;
-      }
+    .mytitle>button:hover {
+      border: 2px solid white;
+    }
 
-      .mycomment {
-        color: gray;
-      }
+    .mycomment {
+      color: gray;
+    }
 
-      .mycards {
-        margin: 20px auto 0px auto;
-        width: 95%;
-        max-width: 1200px;
-      }
+    .mycards {
+      margin: 20px auto 0px auto;
+      width: 95%;
+      max-width: 1200px;
+    }
 
-      .mypost {
-        width: 95%;
-        max-width: 500px;
-        margin: 20px auto 0px auto;
-        padding: 20px;
-        box-shadow: 0px 0px 3px 0px gray;
+    .mypost {
+      width: 95%;
+      max-width: 500px;
+      margin: 20px auto 0px auto;
+      padding: 20px;
+      box-shadow: 0px 0px 3px 0px gray;
 
-        display: none;
-      }
+      display: none;
+    }
 
-      .mybtns {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
+    .mybtns {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
 
-        margin-top: 20px;
-      }
+      margin-top: 20px;
+    }
 
-      .mybtns > button {
-        margin-right: 10px;
-      }
+    .mybtns>button {
+      margin-right: 10px;
+    }
 
-      #login-button {
-        width: 80px;
-        height: 35px;
-        font-size: 12px;
-      }
+    #login-button {
+      width: 80px;
+      height: 35px;
+      font-size: 12px;
+    }
 
-      #sign-button {
-        width: 80px;
-        height: 35px;
-        margin-left: 10px;
-        font-size: 12px;
-      }
+    #sign-button {
+      width: 80px;
+      height: 35px;
+      margin-left: 10px;
+      font-size: 12px;
+    }
 
-      #header-idinput {
-        width: 200px;
-        height: 35px;
-        font-size: 12px;
-      }
-      #header-pwinput {
-        width: 200px;
-        height: 35px;
-        font-size: 12px;
-      }
-      #signbox-nologin {
-        display: none;
-      }
+    #header-idinput {
+      width: 200px;
+      height: 35px;
+      font-size: 12px;
+    }
 
-      #signbox-yeslogin {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
+    #header-pwinput {
+      width: 200px;
+      height: 35px;
+      font-size: 12px;
+    }
 
-      #signbox-yeslogin > #login-info {
-        display: flex;
-        align-items: center;
-        margin-right: 10px;
-      }
-      #signbox-yeslogin > #login-info > #login-info-word {
-        margin-right: 10px;
-      }
-      #signbox-yeslogin > #login-info > #login-info-button {
-        width: 80px;
-        height: 35px;
-        font-size: 12px;
-        background-color: aquamarine;
-        border: none;
-        border-radius: 10px;
-      }
+    #signbox-nologin {
+      display: none;
+    }
 
-      #signbox-yeslogin > #writing-button {
-        width: 80px;
-        height: 35px;
-        font-size: 12px;
-        color: white;
-        border: none;
-        background-color: rgb(24, 155, 111);
-        border-radius: 10px;
-      }
+    #signbox-yeslogin {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-      @media (max-width: 800px) {
-      }
+    #signbox-yeslogin>#login-info {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+    }
 
-      /* 커스톰 클래스 not 부트스트랩! */
+    #signbox-yeslogin>#login-info>#login-info-word {
+      margin-right: 10px;
+    }
 
-      .cardform {
-        /* display: flex;
+    #signbox-yeslogin>#login-info>#login-info-button {
+      width: 80px;
+      height: 35px;
+      font-size: 12px;
+      background-color: aquamarine;
+      border: none;
+      border-radius: 10px;
+    }
+
+    #signbox-yeslogin>#writing-button {
+      width: 80px;
+      height: 35px;
+      font-size: 12px;
+      color: white;
+      border: none;
+      background-color: rgb(24, 155, 111);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 800px) {}
+
+    /* 커스톰 클래스 not 부트스트랩! */
+
+    .cardform {
+      /* display: flex;
         justify-content: center;
         align-items: center; */
-        height: 350px;
-        /* border: 1px solid black; */
-      }
+      height: 350px;
+      /* border: 1px solid black; */
+    }
 
-      .cardtitle {
-        margin-top: 30px;
-        margin-bottom: 30px;
-      }
+    .cardtitle {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
 
-      .cardwriter {
-        margin-bottom: 20px;
-      }
+    .cardwriter {
+      margin-bottom: 20px;
+    }
 
-      .card-custom-content {
-        /* font-size: 12px; */
-        text-overflow: ellipsis;
-        overflow: hidden;
+    .card-custom-content {
+      /* font-size: 12px; */
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .modal.show {
+      display: block;
+    }
+
+    .modal_body {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 400px;
+      height: 600px;
+
+      padding: 40px;
+
+      text-align: center;
+
+      background-color: rgb(255, 255, 255);
+      border-radius: 10px;
+      box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+      transform: translateX(-50%) translateY(-50%);
+    }
+    .create-post {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+
+
+      width: 100%;
+      height: 100%;
+
+      display: none;
+
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .create-post.show {
+      display: none;
+    }
+
+    .post_body {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 400px;
+      height: 600px;
+
+      padding: 40px;
+
+      text-align: center;
+
+      background-color: rgb(255, 255, 255);
+      border-radius: 10px;
+      box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    .signup {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+
+
+      width: 100%;
+      height: 100%;
+
+      display: none;
+
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .signup.show {
+      display: block;
+    }
+
+    .input-form {
+      font-family: 'Noto Sans KR', sans-serif;
+      max-width: 680px;
+      color: black;
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
+
+    .signup_body {
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 400px;
+      height: 800px;
+
+      padding: 40px;
+
+      text-align: center;
+
+      background-color: rgb(255, 255, 255);
+      border-radius: 10px;
+      box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+      transform: translateX(-50%) translateY(-50%);
+    }
+    .comment-box-custom {
+        width: 100%;
+        min-height: 50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
       }
-    </style>
-  </head>
-  <body>
-    <!-- ! 헤더-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">고민상담게시판</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
+      .write-style-custom {
+        font-size: 16px;
+      }
+      .comment-style-custom {
+        margin-left: 5px;
+        font-size: 16px;
+      }
+  </style>
+  <script>
+    function login() {
+      $.ajax({
+        type: "POST",
+        url: "/login",
+        data: { user_id: $('#header-idinput').val(), user_pw: $('#header-pwinput').val() },
+        success: function (response) {
+          if (response['result'] == 'success') {
+            // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장
+            $.cookie('cutoken', response['token']);
+
+            alert('로그인 완료!')
+            window.location.href = '/'
+          } else {
+            // 로그인이 안되면 에러메시지
+            alert(response['message'])
+          }
+        }
+      })
+    }
+    function signup() {
+      $.ajax({
+        type: "POST",
+        url: "/signup",
+        data: { user_id: $('#signup_user_id').val(), user_pw: $('#signup_user_pw').val(), user_name: $('#signup_user_name').val(), user_pw2: $('#signup_user_pw2').val(), },
+        success: function (response) {
+          if (response['result'] == 'success') {
+            alert('회원가입 완료!')
+            window.location.href = '/'
+          } else {
+            alert(response['message'])
+          }
+        }
+      })
+    }
+    function signupPopup() {
+      popup = document.querySelector('.signup')
+      popup.style.display = 'block';
+    }
+    function signupPopdown() {
+      popup = document.querySelector('.signup')
+      popup.style.display = 'none';
+    }
+
+
+    $(document).ready(function () {
+      if ($.cookie('cutoken') == undefined) {
+        // 내가 쓴 글 숨기기
+      } else {
+        user_listing();//
+      }
+      listing();
+    });
+    function listing() {
+      console.log("aaa")
+      $.ajax({
+        type: 'GET',
+        url: '/get_post',
+        data: {},
+        success: function (response) {
+
+          let rows = response['post_list']
+          console.log(rows)
+          for (let i = 0; i < rows.length; i++) {
+            let post_num = rows[i]['post_num']
+            let create_date = rows[i]['create_date']
+            let title = rows[i]['title']
+            let user_name = rows[i]['user_name']
+            let content = rows[i]['content']
+            temp_html = `<div class="col cardform" onclick="detail(${post_num})">
+        <div class="card h-100 border-info">
+          <div class="card-body">
+            <h3 class="card-title text-info text-truncate cardtitle">
+              ${title}
+            </h3>
+            <div class="cardwriter">
+              <h6 class="card-subtitle mb-2 text-muted">${user_name}</h6>
+            </div>
+            <div class="cardtime">
+              <h6 class="card-subtitle mb-2 text-muted">${create_date}</h6>
+            </div>
+            <div class="card-custom-content">
+              <p class="card-text text-dark">
+                ${content}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>`
+            $('#cards-box').append(temp_html)
+          }
+        }
+      })
+    }
+    function user_listing() {
+      $.ajax({
+        type: 'GET',
+        url: '/user/get_post',
+        data: {},
+        success: function (response) {
+          let rows = response['post_list']
+          if (rows != null) {
+            for (let i = 0; i < rows.length; i++) {
+              let post_num = rows[i]['post_num']
+              let create_date = rows[i]['create_date']
+              let title = rows[i]['title']
+              let user_name = rows[i]['user_name']
+              let content = rows[i]['content']
+              temp_html = `<div class="col cardform" onclick="detail(${post_num})">
+        <div class="card h-100 border-info">
+          <div class="card-body">
+            <h3 class="card-title text-info text-truncate cardtitle">
+              ${title}
+            </h3>
+            <div class="cardwriter">
+              <h6 class="card-subtitle mb-2 text-muted">${user_name}</h6>
+            </div>
+            <div class="cardtime">
+              <h6 class="card-subtitle mb-2 text-muted">${create_date}</h6>
+            </div>
+            <div class="card-custom-content">
+              <p class="card-text text-dark">
+                ${content}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>`
+              $('#my-cards-box').append(temp_html)
+            }
+          }
+
+
+        }
+      })
+    }
+    function save_comment() {
+      let content = $('#content').val()
+      let title = $('#title').val()
+      $.ajax({
+        type: 'POST',
+        url: '/set_post',
+        data: { title: title, content: content },
+        success: function (response) {
+
+          if (response['result'] == 'success') {
+            alert(response['msg'])
+            window.location.reload()
+          } else {
+            alert(response['msg'])
+          }
+
+
+        }
+      })
+    }
+    function post_modal(post_num) {
+
+      $.ajax({
+        type: 'GET',
+        url: '/detail',
+        data: { post_num: post_num },
+        success: function (response) {
+          let post = response['post_detail']
+          let user_name = post['user_name']
+          let content = post['content']
+          let date = post['post']
+
+          let rows = response['comment_list']
+          for (let i = 0; i < rows.length; i++) {
+            let name = rows[i]['user_name']
+            let content = rows[i]['content']
+          }
+
+        }
+      })
+    }
+    function detail(post_num) {
+      $.ajax({
+        type: "GET",
+        url: "/detail",
+        data: { post_num: post_num },
+        success: function (response) {
+          let post = response[0]['post_detail'][0]
+          let title = post['title']
+          let user_name = post['user_name']
+          let content = post['content']
+          let date = post['create_date']
+
+          $('#post-title').text(title)
+          $('#post-username').text(user_name)
+          $('#post-content').text(content)
+          $('#post-date').text(date)
+
+          console.log(response)
+
+          let rows = response[1]['comment_list']
+          for (let i = 0; i < rows.length; i++) {
+            let name = rows[i]['user_name']
+            let content = rows[i]['content']
+            let temp_html = `<div class="comment-box-custom">
+        <div class="write-style-custom">${name} :</div>
+        <div class="comment-style-custom">${content}</div>
+      </div>`
+            console.log(name, content)
+            
+            $('#comment_list').append(temp_html)
+          }
+          detailPopup()
+        }
+      })
+    }
+    function detailPopup() {
+      popup = document.querySelector('.modal')
+      popup.style.display = 'block';
+    }
+    function postPopup(){
+      popup = document.querySelector('.create-post')
+      popup.style.display = 'block';
+    }
+
+  </script>
+</head>
+
+<body>
+  <!-- ! 헤더-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">고민상담게시판</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="visibility: hidden"></ul>
+
+        <!-- ! (로그인 안한 상태) form이 display:none으로 변경되고, 아래에다가 추가 -> 바닐라 자바스크립트로 추후 작성-->
+        {% if not user_name %}
+        {#{{ user_name }}#}
+        <input class="form-control me-2" type="text" placeholder="아이디를 입력하세요" aria-label="Search" id="header-idinput" />
+        <input class="form-control me-2" type="password" placeholder="패스워드를 입력하세요" aria-label="Search"
+          id="header-pwinput" />
+        <button class="btn btn-outline-success" type="submit" id="login-button" onclick="login()">
+          로그인
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul
-            class="navbar-nav me-auto mb-2 mb-lg-0"
-            style="visibility: hidden"
-          ></ul>
+        <button class="btn btn-outline-success" type="submit" id="sign-button" onclick="signupPopup()">
+          회원가입
+        </button>
 
-          <!-- ! (로그인 안한 상태) form이 display:none으로 변경되고, 아래에다가 추가 -> 바닐라 자바스크립트로 추후 작성-->
-          <div id="signbox-nologin">
-            <form class="d-flex">
-              <input
-                class="form-control me-2"
-                type="text"
-                placeholder="아이디를 입력하세요"
-                aria-label="Search"
-                id="header-idinput"
-              />
-              <input
-                class="form-control me-2"
-                type="password"
-                placeholder="패스워드를 입력하세요"
-                aria-label="Search"
-                id="header-pwinput"
-              />
-              <button
-                class="btn btn-outline-success"
-                type="submit"
-                id="login-button"
-              >
-                로그인
-              </button>
-              <button
-                class="btn btn-outline-success"
-                type="submit"
-                id="sign-button"
-              >
-                회원가입
-              </button>
-            </form>
+        <!-- ! (로그인 한 상태) 정보 저장 -->
+        {% endif %}
+        {% if user_name %}
+        <div id="signbox-yeslogin">
+          <div id="login-info">
+            <div id="login-info-word">{{user_name}}님 환영합니다</div>
+            <button id="login-info-button">로그아웃</button>
           </div>
+          <button id="writing-button" onclick="postPopup()">글쓰기</button>
+        </div>
 
-          <!-- ! (로그인 한 상태) 정보 저장 -->
-          <div id="signbox-yeslogin">
-            <div id="login-info">
-              <div id="login-info-word">test님 환영합니다</div>
-              <button id="login-info-button">로그아웃</button>
-            </div>
-            <button id="writing-button">글쓰기</button>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <!-- ! 바디 -->
-    <!-- !! 카드 붙여넣는곳 -->
-    <div class="mycards">
-      <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
-        <!-- ? ---------------------------------------->
-        <!-- ! 카드부분 : 고민제목, 작성자, 고민내용, 작성일 -->
-        <!-- ? ---------------------------------------->
-        <div class="col cardform" onclick="detail(post_num)">
-          <div class="card h-100 border-info">
-            <div class="card-body">
-              <h3 class="card-title text-info text-truncate cardtitle">
-                운동하다 넘어졌어요 근데 너무 안아픔 근데
-              </h3>
-              <div class="cardwriter">
-                <h6 class="card-subtitle mb-2 text-muted">작성자</h6>
-              </div>
-              <div class="cardtime">
-                <h6 class="card-subtitle mb-2 text-muted">2020년 3월 20일</h6>
-              </div>
-              <div class="card-custom-content">
-                <p class="card-text text-dark">
-                  어떻게 해야할지 모르겠네요 일으켜주시면 감사.어떻게 해야할지
-                  모르겠네요 일으켜주시면 어떻게 해야할지 모르겠네요
-                  일으켜주시면 감사.어떻게 해야할지 모르겠네요
-                  일으켜주시면어떻게 해야할지 모르겠네요
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ! -->
+        
+        
+        {% endif %}
       </div>
     </div>
-    <!-- ! 스크립트 -->
-    <script>
+  </nav>
+  <!-- ! 바디 -->
+  <!-- !! 카드 붙여넣는곳 -->
+  <div class="mycards">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="my-cards-box">
+      <!-- ? ---------------------------------------->
+      <!-- ! 카드부분 : 고민제목, 작성자, 고민내용, 작성일 -->
+      <!-- ? ---------------------------------------->
+      <!-- 카드 들어가는 부분 -->
+      <!-- ! -->
+    </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+      <!-- ? ---------------------------------------->
+      <!-- ! 카드부분 : 고민제목, 작성자, 고민내용, 작성일 -->
+      <!-- ? ---------------------------------------->
+      <!-- 카드 들어가는 부분 -->
+      <!-- ! -->
+    </div>
+
+    <!-- 모달 넣는 곳 -->
+    <div class="modal">
+      <div class="modal_body">
+        <div style="background-color: green; width:100%; height: 10px;"></div>
+        <div id="post-title"></div>
+        <div id="post-username"></div>
+        <div id="post-content"></div>
+        <div id="post-date"></div>
+
+        <div>댓글</div>
+        <div id="comment_list"></div>
+      </div>
+      
+    </div>
+
+    <div class="create-post">
+      <div class="post_body">
+        <input class="form-control me-2" type="text" placeholder="고민을 함께 나누어보아요.. 고민은 나누면 가벼워집니다." aria-label="Search" id="input-title" />
+        <input class="form-control me-2" type="text"  id="input-content" />
+        <button>제출</button>
+        <button>취소</button>
+      </div>
+      
+    </div>
+
+    <div class="signup">
+      <div class="container">
+        <div class="input-form-backgroud row">
+          <div class="input-form col-md-12 mx-auto">
+            <button type="button" class="btn btn-light" style="float: right;" onclick="signupPopdown()">X</button>
+            <h4 class="mb-3">회원가입</h4>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="name">ID</label>
+                <input type="text" class="form-control" id="signup_user_id" name="user_id" placeholder="" value=""
+                  required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="nickname">별명</label>
+                <input type="text" class="form-control" id="signup_user_name" name="user_name" placeholder="" value=""
+                  required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password">비밀번호</label>
+              <input type="password" class="form-control" id="signup_user_pw" name="user_pw" placeholder="password"
+                required>
+            </div>
+
+            <div class="mb-3">
+              <label for="password">비밀번호 확인</label>
+              <input type="password" class="form-control" id="signup_user_pw2" name="user_pw2" placeholder="password"
+                required>
+            </div>
+
+            <hr class="mb-4">
+            <div class="mb-4"></div>
+            <button class="btn btn-primary btn-lg btn-block" onclick="signup()">가입 완료</button>
+
+          </div>
+        </div>
+        <footer class="my-3 text-center text-small">
+          <p class="mb-1">&copy; 2021 YD</p>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+  </div>
+  <!-- ! 스크립트 -->
+  <script>
       // 카드 텍스트가 50자이상이면
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
