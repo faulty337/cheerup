@@ -1,0 +1,5 @@
+# CLIENT_ID = ""
+# CLIENT_SECRET = ""
+# REDIRECT_URI = ""
+SECRET_KEY = "cheerup"
+# LOGOUT_REDIRECT_URI = "http://localhost:5000/"
