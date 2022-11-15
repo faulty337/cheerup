@@ -24,10 +24,10 @@
             }
         });
         function listing() {
-
+            console.log("aa")
             $.ajax({
                 type: 'GET',
-                url: '/',
+                url: '/get_post',
                 data: {},
                 success: function (response) {
 
@@ -35,12 +35,12 @@
 
                     for (let i = 0; i < rows.length; i++) {
                         let post_num = rows[i]['post_num']
-                        let date = rows[i]['date']
+                        let date = rows[i]['create_date']
                         let title = rows[i]['title']
                         let name = rows[i]['user_name']
                         let content = rows[i]['content']
-                        temp_html=`onclick=aa(${post_num})`
-                        $('asd').append(temp_html)
+
+
                     }
                 }
             })
@@ -49,7 +49,7 @@
             let user_id = $.cookie('cutoken')
             $.ajax({
                 type: 'GET',
-                url:'/',
+                url:'/user/get_post',
                 data:{user_id:user_id},
                 success : function (response){
 
@@ -61,8 +61,7 @@
                         let title = rows[i]['title']
                         let name = rows[i]['user_name']
                         let content = rows[i]['content']
-                        temp_html=`onclick=aa(${post_num})`
-                        $('#cards-box').append(temp_html)
+                        $('#').append(temp_html)
                     }
 
                 }
@@ -83,23 +82,28 @@
             })
         }
         function post_modal(post_num){
-
             $.ajax({
                 type:'GET',
                 url:'/detail',
                 data:{post_num:post_num},
                 success: function (response){
                     let post = response['post_detail']
-                    let user_name = post['user_name']
+                    let title = post['title']
+                    let name = post['user_name']
                     let content = post['content']
                     let date = post['post']
 
                     let rows = response['comment_list']
                        for(let i= 0; i< rows.length; i++){
-                        let name = rows[i]['user_name']
-                        let content = rows[i]['content']
-                        $('#cards-box').append(temp_html)
+                           let comment_name = rows[i]['user_name']
+                           let comment_content = rows[i]['content']
+                           comment_html = `${comment_content},${comment_name}`
+                           $('#test2').append(comment_html)
+
+
                     }
+                        temp_html=`${post_num},${date},${user_name},${title},${name},${content}`
+                        $('#test').append(temp_html)
 
                 }
             })
@@ -107,6 +111,9 @@
     </script>
 </head>
 <body>
+<div>
+    <a id="test"></a>
+</div>
 
 </body>
 </html>

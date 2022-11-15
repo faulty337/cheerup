@@ -11,7 +11,7 @@ from pymongo import MongoClient
 # ? 맥 환경 DB 초기화 코드( certifi가 필요 )
 ca = certifi.where()
 client = MongoClient(
-    "mongodb+srv://test:sparta@cluster0.mapsk1p.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    "mongodb+srv://test:sparta@cluster0.g39e2ay.mongodb.net/?retryWrites=true&w=majority",
     tlsCAFile=ca,
 )
 db = client.cheerup
@@ -23,28 +23,28 @@ def index():
     return render_template('index.html')
 @app.route('/get_post',methods=["GET"])
 def post_get():
-    post_list = list(db.post.find({}, {'_id': False}))
-    return jsonify({'post':post_list})
-    
+    post_list = list(db.posts.find({}, {'_id': False}))
+    return jsonify({'post_list':post_list})
+
 @app.route('/user/get_post', methods=["GET"])
 def user_post_get():
     payload =request.form['user_id']
     user_id = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-    post_list = list(db.post.find({'user_id':user_id},{'_id':False}))
+    post_list = list(db.posts.find({'user_id':user_id},{'_id':False}))
 
     return jsonify({'post_list':post_list})
 @app.route('/detail', methods=["GET"])
 def post_detail():
-    post_num = request.form['post_num']
-    post_detail = db.post.find({'post_num':post_num},{'_id':False})
-    comment_list = list(db.commennt.find({'post_num':post_num},{'_id':False}))
+    #post_num = request.form['post_num']
+    post_detail = db.posts.find_one({'post_num':1},{'_id':False})
+    comment_list = list(db.comments.find({'post_num':1},{'_id':False}))
     return jsonify({'post_detail':post_detail},{'comment_list':comment_list})
     
 @app.route('/set_post', methods=["POST"])
 def set_post():
     # 게시글 번호 넣기
-    post_list = list(db.post.find({},{'_id':False}))
+    post_list = list(db.posts.find({},{'_id':False}))
     count = len(post_list) + 1
 
     # 토큰으로 id 가져와서 닉네임 조회
