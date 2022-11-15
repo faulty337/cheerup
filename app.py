@@ -21,12 +21,12 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
-@app.route('/get_post',methods="GET")
+@app.route('/get_post',methods=["GET"])
 def post_get():
     post_list = list(db.bucket.find({}, {'_id': False}))
     return jsonify({'post':post_list})
     
-@app.route('/user/get_post', methods="GET")
+@app.route('/user/get_post', methods=["GET"])
 def user_post_get():
     payload =request.form['user_id']
     user_id = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
@@ -34,7 +34,7 @@ def user_post_get():
     post_list = list(db.post.find({'user_id':user_id},{'_id':False}))
 
     return jsonify({'post_list':post_list})
-@app.route('/detail', methods="GET")
+@app.route('/detail', methods=["GET"])
 def post_detail():
     post_num = request.form['post_num']
     post_detail = db.post.find({'post_num':post_num},{'_id':False})
@@ -65,9 +65,6 @@ def set_post():
         'date': date_recive
     }
     db.cheereup.insert_one(doc)
-
-
-
 
 @app.route('/logout')
 def logout():
