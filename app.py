@@ -20,7 +20,18 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    token_receive = request.cookies.get('chtoken')
+    print(token_receive)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"user_id": payload['user_id']})
+        print(payload['user_id'], user_info)
+        return render_template('index.html', user_name=user_info["user_name"])
+    except jwt.ExpiredSignatureError:
+        return render_template('index.html')
+    except jwt.exceptions.DecodeError:
+        return render_template('index.html')
+
 @app.route('/get_post',methods=["GET"])
 def post_get():
     post_list = list(db.posts.find({}, {'_id': False}))
@@ -75,15 +86,18 @@ def logout():
 
 @app.route('/signup', methods=['POST'])  # GET(정보보기), POST(정보수정) 메서드 허용
 def signup():
-    user_id = request.form.get('user_id')
-    user_name = request.form.get('user_name')
-    user_pw = request.form.get('user_pw')
-    user_pw2 = request.form.get('user_pw2')
+    user_id = request.form['user_id']
+    user_name = request.form['user_name']
+    user_pw = request.form['user_pw']
+    user_pw2 = request.form['user_pw2']
     print(user_id, user_name, user_pw, user_pw2)
-    if user_pw != user_pw2:
-        return {'result':'fail', 'messag':'입력한 비밀번호가 다릅니다.'}
+    if user_id is "" or user_name is "" or user_pw is "" or user_pw2 is "":
+        return {'result':'fail', 'message':'작성하지 않은 칸이 존재합니다.'}
+    elif user_pw != user_pw2:
+        return {'result':'fail', 'message':'입력한 비밀번호가 다릅니다.'}
     elif db.users.find_one({'userid' : user_id}) is not None:
-        return {'result':'fail', 'messag':'이미 존재하는 아이디입니다.'}
+        return {'result':'fail', 'message':'이미 존재하는 아이디입니다.'}
+    
     else:
         # usertable = User(userid, username, password)
         usertable = {
@@ -98,11 +112,12 @@ def signup():
 def login():
     user_id = request.form['user_id']
     user_pw = hashlib.sha256(request.form['user_pw'].encode('utf-8')).hexdigest()
+    print(user_id)
     print(db.users.find_one({'user_id': user_id}))
     
     if db.users.find_one({'user_id': user_id, 'user_pw': user_pw}) is not None:
         payload = {
-            'userid': user_id,
+            'user_id': user_id,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60)
         }
 
