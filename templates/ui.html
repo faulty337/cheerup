@@ -303,9 +303,10 @@
     .comment-box-custom {
       width: 100%;
       min-height: 50px;
-      display: flex;
+      /* display: flex;
       justify-content: flex-start;
-      align-items: center;
+      align-items: center; */
+        margin-right: 10px;
     }
 
     .write-style-custom {
@@ -313,9 +314,57 @@
     }
 
     .comment-style-custom {
+        width: 90%;
       margin-left: 5px;
       font-size: 16px;
+        word-break: break-all;
+
+      }
+
+      #comment_list {
+        width: 100%;
+        /* height: 100px;
+        min-height: 100px;
+        background-color: antiquewhite; */
+      }
+
+      #post-title {
+        width: 100%;
+        height: 40px;
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      #post-username {
+        width: 100%;
+        height: 40px;
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      #post-content {
+        width: 100%;
+        height: 40px;
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      #post-date {
+        width: 100%;
+        height: 40px;
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
     }
+
+
   </style>
   <script>
     function login() {
@@ -529,10 +578,11 @@
           for (let i = 0; i < rows.length; i++) {
             let name = rows[i]['user_name']
             let content = rows[i]['content']
-            let temp_html = `<div class="comment-box-custom">
-        <div class="write-style-custom">${name} :</div>
-        <div class="comment-style-custom">${content}</div>
-      </div>`
+            let temp_html = 
+            `<div class="comment-box-custom">
+              <div class="write-style-custom">${name} :</div>
+              <div class="comment-style-custom">${content}</div>
+            </div>`
             console.log(name, content)
 
             $('#comment_list').append(temp_html)
@@ -622,6 +672,7 @@
         <div id="post-content"></div>
         <div id="post-date"></div>
         <div>댓글</div>
+        <div id="comment-subject">댓글</div>
         <div id="comment_list"></div>
       </div>
 
