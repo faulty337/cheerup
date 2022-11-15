@@ -15,6 +15,9 @@
     <title>CheerUp</title>
     <script>
           $(document).ready(function () {
+            if($.cookie('cutoken') == undefined){
+                // 내가 쓴 글 숨기기
+            }
             listing();
             if($.cookie('cutoken') != undefined){
                 user_listing();
