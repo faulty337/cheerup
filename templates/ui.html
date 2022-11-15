@@ -364,6 +364,14 @@
         justify-content: flex-start;
     }
 
+    #myagony {
+      font-size: 32px;
+    }
+
+    #openagony {
+      margin-top: 30px;
+      font-size: 32px;
+    }
 
   </style>
   <script>
@@ -468,6 +476,7 @@
         </div>
       </div>`
             $('#cards-box').append(temp_html)
+            $('#myagony').hide();
           }
         }
       })
@@ -507,6 +516,7 @@
         </div>
       </div>`
               $('#my-cards-box').append(temp_html)
+              $('#myagony').show()
             }
           }
 
@@ -672,6 +682,7 @@
   <!-- ! 바디 -->
   <!-- !! 카드 붙여넣는곳 -->
   <div class="mycards">
+    <div id="myagony">나의 고민</div>
     <div class="row row-cols-1 row-cols-md-4 g-4" id="my-cards-box">
       <!-- ? ---------------------------------------->
       <!-- ! 카드부분 : 고민제목, 작성자, 고민내용, 작성일 -->
@@ -679,6 +690,7 @@
       <!-- 카드 들어가는 부분 -->
       <!-- ! -->
     </div>
+    <div id="openagony">고민거리 오픈</div>
     <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
       <!-- ? ---------------------------------------->
       <!-- ! 카드부분 : 고민제목, 작성자, 고민내용, 작성일 -->
