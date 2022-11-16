@@ -59,6 +59,7 @@ def post_detail():
     post_num = int(request.args.get('post_num'))
     post_detail = list(db.posts.find({'post_num':post_num},{'_id':False}))
     comment_list = list(db.comments.find({'post_num':post_num},{'_id':False}))
+    print(post_num, comment_list)
     return jsonify({'post_detail':post_detail},{'comment_list':comment_list})
 
 
@@ -128,7 +129,7 @@ def login():
     if db.users.find_one({'user_id': user_id, 'user_pw': user_pw}) is not None:
         payload = {
             'user_id': user_id,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=300)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=600)
         }
 
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
@@ -159,7 +160,7 @@ def comment_write():
     cutoken = request.cookies.get("cutoken")
     try:
         payload = jwt.decode(cutoken, SECRET_KEY, algorithms=['HS256'])
-        post_num = request.form['post_num']
+        post_num = int(request.form['post_num'])
         user_id = payload['user_id']
         user_name = db.users.find_one({'user_id':user_id})['user_name']
         content = request.form['content']
