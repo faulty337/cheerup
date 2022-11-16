@@ -472,10 +472,10 @@
           <textarea class="comment-write"></textarea>
           <button class="comment-save border-info" onclick="save_comment()">등록</button>
         </div>
-          <div class="comment-area" id="comment_area">
-            <div class="comment-name" id="comment-name"></div>
-            <div class="comment-content" id="comment-content"></div>
-            <hr>
+        <div class="comment-area" id="comment_area">
+          <div class="comment-name" id="comment-name"></div>
+          <div class="comment-content" id="comment-content"></div>
+          <hr>
           <!-- <hr> -->
         </div>
         <div id="comment-subject">댓글</div>
@@ -485,8 +485,7 @@
 
     <div class="create-post">
       <div class="post_body">
-        <input class="form-control me-2" type="text" placeholder="제목"
-          id="input-title"></input>
+        <input class="form-control me-2" type="text" placeholder="제목" id="input-title"></input>
         <textarea class="form-control me-2" type="text" placeholder="고민을 함께 나누어보아요.. 고민은 나누면 가벼워집니다."
           id="input-post-content"></textarea>
         <!-- <button onclick="save_post()">제출</button>
@@ -517,29 +516,29 @@
               </div>
               <div class="mb-3">
                 <label for="nickname">별명</label>
-                <input type="text" class="form-control" id="signup_user_name" name="user_name" placeholder="NICKNAME" value=""
-                  required>
+                <input type="text" class="form-control" id="signup_user_name" name="user_name" placeholder="NICKNAME"
+                  value="" required>
               </div>
-  
+
               <div class="mb-3">
                 <label for="password">비밀번호</label>
                 <input type="password" class="form-control" id="signup_user_pw" name="user_pw" placeholder="PASSWORD"
                   required>
               </div>
-  
+
               <div class="mb-3">
                 <label for="password">비밀번호 확인</label>
                 <input type="password" class="form-control" id="signup_user_pw2" name="user_pw2" placeholder="PASSWORD"
                   required>
               </div>
             </div>
-            
+
 
             <!-- <hr class="mb-4"> -->
             <div id="signup-button-box">
               <button class="btn btn-primary btn-lg btn-block" onclick="signup()">가입 완료</button>
             </div>
-            
+
 
           </div>
         </div>

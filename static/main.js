@@ -69,10 +69,13 @@ function logout() {
 }
 
 $(document).ready(function () {
-    if ($.cookie("cutoken") == undefined) {
+    if ($.cookie("cutoken") == undefined) 
+    {
+        $("#myagony").hide()
         // 내가 쓴 글 숨기기
     } else {
         user_listing(); //
+        $("#myagony").show()
     }
     listing();
 });
@@ -111,7 +114,7 @@ function listing() {
       </div>
     </div>`;
                 $("#cards-box").append(temp_html);
-                $("#myagony").hide();
+                
             }
         }
     });
@@ -151,7 +154,6 @@ function user_listing() {
                     </div>
                 </div>`
                     $('#my-cards-box').append(temp_html)
-                    $('#myagony').show()
                 }
             }
 
@@ -252,10 +254,17 @@ function postPopup() {
 $(document).mouseup(function (e){
 
 	var container = $('.modal');
+    var postcontainer = $('.create-post');
+
+	if( postcontainer.has(e.target).length === 0){
+
+	    postcontainer.css('display','none');
+
+	}
 
 	if( container.has(e.target).length === 0){
 
-	container.css('display','none');
+	    container.css('display','none');
 
 	}
 
