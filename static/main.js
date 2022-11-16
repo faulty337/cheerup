@@ -235,7 +235,8 @@ function detail(post_num) {
         let temp_html = `<div class="comment-box-custom">
             <div class="write-style-custom">${name} :</div>
             <div class="comment-style-custom">${content}</div>
-          </div>`;
+          </div>
+<hr class="line2">`;
 
         $("#comment_list").append(temp_html);
       }
