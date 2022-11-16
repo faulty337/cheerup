@@ -463,19 +463,18 @@
     <!-- 모달 넣는 곳 -->
     <div class="modal">
       <div class="modal_body">
-        <button onclick="detailPopdown()">닫기</button>
-        <div class ="post-number"></div>
         <div id="post-title"></div>
         <div id="post-username"></div>
+          <div id="post-date"></div>
         <div id="post-content"></div>
-        <div id="post-date"></div>
-        <input class="form-control me-2" type="text" id="input-content"/>
-        <button onclick="save_comment()">입력</button>
-        <div>댓글</div>
-        <div id="comment-subject">댓글</div>
-        <div id="comment_list"></div>
+          <textarea class="comment-write"></textarea>
+          <button class="comment-save border-info">등록</button>
+        <div class="comment-area" id="comment_area">
+            <div class="comment-name" id="comment-name">닉네임</div>
+            <div class="comment-content" id="comment-content">내용</div>
+            <hr>
+        </div>
       </div>
-
     </div>
 
     <div class="create-post">

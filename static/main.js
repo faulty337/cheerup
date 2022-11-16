@@ -249,3 +249,11 @@ function postPopup() {
   popup = document.querySelector(".create-post");
   popup.style.display = "block";
 }
+
+$(document).mouseup(function (e) {
+  var container = $(".modal");
+
+  if (container.has(e.target).length === 0) {
+    container.css("display", "none");
+  }
+});
