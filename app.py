@@ -22,7 +22,6 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     token_receive = request.cookies.get('cutoken')
-    print(token_receive)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"user_id": payload['user_id']})
@@ -37,13 +36,11 @@ def index():
 @app.route('/get_post',methods=["GET"])
 def post_get():
     post_list = list(db.posts.find({}, {'_id': False}))
-    print(post_list)
     return jsonify({'post_list':post_list})
     
 @app.route('/user/get_post', methods=["GET"])
 def user_post_get():
     token_receive = request.cookies.get('cutoken')
-    print(token_receive)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"user_id": payload['user_id']})
@@ -60,11 +57,8 @@ def user_post_get():
 @app.route('/detail', methods=["GET"])
 def post_detail():
     post_num = int(request.args.get('post_num'))
-    print(post_num)
     post_detail = list(db.posts.find({'post_num':post_num},{'_id':False}))
-    print(post_detail)
     comment_list = list(db.comments.find({'post_num':post_num},{'_id':False}))
-    print(comment_list)
     return jsonify({'post_detail':post_detail},{'comment_list':comment_list})
 
 
@@ -77,23 +71,19 @@ def set_post():
     content_recive = request.form['content']
     title = request.form['title']
     date_recive = datetime.datetime.today()
-    print(count, content_recive, title, date_recive)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"user_id": payload['user_id']})
         user_id = user_info['user_id']
         name_receive = (user_info['user_name'])
-        print(user_id, name_receive)
         # 게시글 내용 넣기
-        
         # 게시글 작성 날짜
-
         doc = {
             'post_num' : count ,
             'user_id' : user_id,
             'user_name': name_receive,
             'title' : title,
-            'comment': content_recive,
+            'content': content_recive,
             'create_date': date_recive
         }
         db.posts.insert_one(doc)
@@ -105,7 +95,6 @@ def set_post():
 
 @app.route('/logout')
 def logout():
-    #프론트단 처리 필요
     return redirect('/')
 
 @app.route('/signup', methods=['POST'])  # GET(정보보기), POST(정보수정) 메서드 허용
@@ -114,12 +103,11 @@ def signup():
     user_name = request.form['user_name']
     user_pw = request.form['user_pw']
     user_pw2 = request.form['user_pw2']
-    print(user_id, user_name, user_pw, user_pw2)
-    if user_id is "" or user_name is "" or user_pw is "" or user_pw2 is "":
+    if user_id == "" or user_name == "" or user_pw == "" or user_pw2 == "":
         return {'result':'fail', 'message':'작성하지 않은 칸이 존재합니다.'}
     elif user_pw != user_pw2:
         return {'result':'fail', 'message':'입력한 비밀번호가 다릅니다.'}
-    elif db.users.find_one({'userid' : user_id}) is not None:
+    elif db.users.find_one({'user_id' : user_id}) is not None:
         return {'result':'fail', 'message':'이미 존재하는 아이디입니다.'}
     
     else:
@@ -136,8 +124,6 @@ def signup():
 def login():
     user_id = request.form['user_id']
     user_pw = hashlib.sha256(request.form['user_pw'].encode('utf-8')).hexdigest()
-    print(user_id)
-    print(db.users.find_one({'user_id': user_id}))
     
     if db.users.find_one({'user_id': user_id, 'user_pw': user_pw}) is not None:
         payload = {
@@ -196,10 +182,9 @@ def comment_write():
 @app.route('/get_comment',methods=["GET"])
 def get_comment():
     post_num = int(request.args.get('post_num'))
-    print(post_num)
     comment_list = list(db.comments.find({"post_num":post_num},{'_id':False}))
-
     return jsonify({'comment_list':comment_list})
-    
+
+  
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
