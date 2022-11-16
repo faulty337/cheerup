@@ -334,8 +334,9 @@ body::-webkit-scrollbar {
   height: 40px;
   border: 1px solid black;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
+  padding: 10px;
 }
 
 #post-date {
