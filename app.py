@@ -26,12 +26,12 @@ def index():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"user_id": payload['user_id']})
         print(payload['user_id'], user_info)
-        return render_template('ui.html', user_name=user_info["user_name"])
+        return render_template('index.html', user_name=user_info["user_name"])
     except jwt.ExpiredSignatureError:
         
-        return render_template('ui.html')
+        return render_template('index.html')
     except jwt.exceptions.DecodeError:
-        return render_template('ui.html')
+        return render_template('index.html')
 
 @app.route('/get_post',methods=["GET"])
 def post_get():
