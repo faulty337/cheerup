@@ -206,7 +206,7 @@ body::-webkit-scrollbar {
   width: 100%;
   height: 100%;
   display: none;
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
 }
 
 .create-post.show {
@@ -328,6 +328,7 @@ body::-webkit-scrollbar {
 #post-username {
   width: 70%;
   height: 40px;
+  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -348,6 +349,7 @@ body::-webkit-scrollbar {
 #post-date {
   width: 100%;
   height: 40px;
+  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -411,8 +413,10 @@ body::-webkit-scrollbar {
 #post-title {
   width: 100%;
   height: 40px;
+  border: 1px solid black;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-top: 20px;
 }
 
@@ -422,6 +426,7 @@ body::-webkit-scrollbar {
   /* border: 1px solid black; */
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-left: 2px;
   /* float: left; */
   width: 30%;
@@ -492,5 +497,8 @@ body::-webkit-scrollbar {
     display: -webkit-box;
     -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
+}
+#navbar-custom {
+  background-color: rgb(250, 250, 222);
 }
 /* ----- */
