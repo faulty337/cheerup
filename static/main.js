@@ -87,7 +87,8 @@ function listing() {
     url: "/get_post",
     data: {},
     success: function (response) {
-      let rows = response["post_list"];
+      let rows = response["post_list"].reverse();
+
       console.log(rows);
       for (let i = 0; i < rows.length; i++) {
         let post_num = rows[i]["post_num"];
@@ -126,7 +127,7 @@ function user_listing() {
     url: "/user/get_post",
     data: {},
     success: function (response) {
-      let rows = response["post_list"];
+      let rows = response["post_list"].reverse();
       if (rows != null) {
         for (let i = 0; i < rows.length; i++) {
           let post_num = rows[i]["post_num"];
@@ -225,7 +226,7 @@ function detail(post_num) {
       $("#post-content").text(content);
       $("#post-date").text(date);
 
-      let rows = response[1]["comment_list"];
+      let rows = response[1]["comment_list"].reverse();
 
       $("#comment_list").empty();
       for (let i = 0; i < rows.length; i++) {
