@@ -334,8 +334,9 @@ body::-webkit-scrollbar {
   height: 40px;
   border: 1px solid black;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
+  padding: 10px;
 }
 
 #post-date {
@@ -390,10 +391,11 @@ body::-webkit-scrollbar {
 
 #input-post-content {
   width: 100%;
-  min-height: 700px;
+  height: 70%;
   border: 1px solid black;
   display: flex;
   vertical-align: top;
+  resize: none;
 }
 
 #post_body_buttons {
