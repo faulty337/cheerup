@@ -5,14 +5,14 @@ import datetime
 import certifi 
 
 from flask import Flask, render_template, jsonify, request, redirect, make_response, flash, url_for
-from config import SECRET_KEY
+from config import SECRET_KEY, DBURL
 from pymongo import MongoClient
 
 
 # ? 맥 환경 DB 초기화 코드( certifi가 필요 )
 ca = certifi.where()
 client = MongoClient(
-    "mongodb+srv://test:sparta@cluster0.g39e2ay.mongodb.net/?retryWrites=true&w=majority",
+    DBURL,
     tlsCAFile=ca,
 )
 db = client.cheerup
