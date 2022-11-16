@@ -292,6 +292,8 @@ body::-webkit-scrollbar {
 
 .write-style-custom {
   font-size: 16px;
+  display: flex;
+    justify-content: flex-start;
 }
 
 .comment-style-custom {
@@ -299,6 +301,8 @@ body::-webkit-scrollbar {
   margin-left: 5px;
   font-size: 16px;
   word-break: break-all;
+  display: flex;
+    justify-content: flex-start;
 }
 
 #comment_list {
@@ -317,37 +321,39 @@ body::-webkit-scrollbar {
   align-items: center;
   justify-content: flex-start;
   margin-top: 20px;
+  font-weight: bold;
+    color: #0dcaf0!important;
 }
 
 #post-username {
   width: 70%;
   height: 40px;
-  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   float: left;
+  color: #0dcaf0!important;
 }
 
 #post-content {
   width: 100%;
-  height: 40px;
-  border: 1px solid black;
+  height: auto;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 10px;
+  font-weight: bold;
 }
 
 #post-date {
   width: 100%;
   height: 40px;
-  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   float: left;
   width: 30%;
+  color: #0dcaf0!important;
 }
 
 #myagony {
@@ -405,10 +411,8 @@ body::-webkit-scrollbar {
 #post-title {
   width: 100%;
   height: 40px;
-  border: 1px solid black;
   display: flex;
   align-items: center;
-  justify-content: center;
   margin-top: 20px;
 }
 
@@ -418,7 +422,6 @@ body::-webkit-scrollbar {
   /* border: 1px solid black; */
   display: flex;
   align-items: center;
-  justify-content: center;
   padding-left: 2px;
   /* float: left; */
   width: 30%;
@@ -426,7 +429,7 @@ body::-webkit-scrollbar {
 
 #post-content {
   width: 100%;
-  height: 700px;
+  height: auto;
   /* border: 1px solid black; */
   display: flex;
   vertical-align: top;
@@ -438,9 +441,18 @@ body::-webkit-scrollbar {
   /* border: 1px solid black; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
   float: left;
   width: 70%;
+}
+.line{
+    width: 100%;
+    border: 2px solid;
+    margin-bottom: 5px;
+  color: #0dcaf0!important;
+}
+.line2{
+  color: #0dcaf0!important;
 }
 .comment-write {
   width: 100%;
@@ -475,5 +487,10 @@ body::-webkit-scrollbar {
   justify-content: space-between;
   /* padding-left: 5px; */
 }
-
+.card-text{
+      white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
 /* ----- */
