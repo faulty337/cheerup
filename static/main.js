@@ -226,7 +226,7 @@ function detail(post_num) {
       $("#post-content").text(content);
       $("#post-date").text(date);
 
-      let rows = response[1]["comment_list"].reverse();
+      let rows = response[1]["comment_list"];
 
       $("#comment_list").empty();
       for (let i = 0; i < rows.length; i++) {
